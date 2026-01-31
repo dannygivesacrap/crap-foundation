@@ -202,7 +202,7 @@ export default function GamePage() {
   // Handle keyboard input - prevent scrolling
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(e.key)) {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " ", "Enter"].includes(e.key)) {
         e.preventDefault();
       }
 
@@ -224,6 +224,7 @@ export default function GamePage() {
           movePlayer(1, 0);
           break;
         case " ":
+        case "Enter":
           if (!gameStarted || gameOver) {
             startNewGame();
           } else if (gameWon) {
@@ -301,28 +302,23 @@ export default function GamePage() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4 overflow-hidden">
-      <div className="text-center mb-6">
-        <h1 className="text-4xl md:text-5xl font-bold text-brand-pink mb-2" style={{ fontFamily: "monospace" }}>
+    <div className="h-screen bg-black flex flex-col items-center justify-center p-2 overflow-hidden">
+      <div className="text-center mb-3">
+        <h1 className="text-3xl md:text-4xl font-bold text-brand-pink mb-1" style={{ fontFamily: "monospace" }}>
           FIND THE LOO
         </h1>
-        <p className="text-white/60 text-sm mb-2">An important mission from The Crap Foundation</p>
-        <div className="flex items-center justify-center gap-6">
-          <div className="text-xl font-bold text-brand-green font-mono">
-            SCORE: {score}
-          </div>
-          <div className="text-xl font-bold text-brand-orange font-mono">
-            ROUND: {round}
-          </div>
+        <div className="flex items-center justify-center gap-4 text-lg font-bold font-mono">
+          <span className="text-brand-green">SCORE: {score}</span>
+          <span className="text-brand-orange">ROUND: {round}</span>
+          {gameStarted && (
+            <button
+              onClick={toggleMusic}
+              className="text-white/40 hover:text-white text-xs transition-colors"
+            >
+              {musicEnabled ? "🔊" : "🔇"}
+            </button>
+          )}
         </div>
-        {gameStarted && (
-          <button
-            onClick={toggleMusic}
-            className="mt-2 text-white/40 hover:text-white text-xs transition-colors"
-          >
-            {musicEnabled ? "🔊 Music ON" : "🔇 Music OFF"}
-          </button>
-        )}
       </div>
 
       {/* Game board */}
@@ -362,14 +358,11 @@ export default function GamePage() {
       </div>
 
       {/* Controls info */}
-      <div className="mt-6 text-center">
+      <div className="mt-3 text-center">
         {!gameStarted && (
-          <div className="space-y-4">
-            <p className="text-white/80 text-lg">
-              Get to the toilet before you step in poop!
-            </p>
-            <p className="text-brand-orange text-sm">
-              Each round gets HARDER!
+          <div className="space-y-2">
+            <p className="text-white/80">
+              Get to the 🚽 before you step in 💩
             </p>
             <button
               onClick={startNewGame}
@@ -377,77 +370,70 @@ export default function GamePage() {
             >
               START GAME
             </button>
-            <p className="text-white/40 text-sm">or press SPACE</p>
+            <p className="text-white/40 text-xs">Press ENTER or SPACE</p>
           </div>
         )}
 
         {gameWon && (
-          <div className="space-y-4">
-            <p className="text-4xl mb-2">🎉</p>
-            <p className="text-brand-green text-2xl font-bold">ROUND {round} COMPLETE!</p>
-            <p className="text-white/60">Score: {score}</p>
-            <p className="text-brand-pink text-sm">Ready for round {round + 1}?</p>
+          <div className="space-y-2">
+            <p className="text-brand-green text-xl font-bold">🎉 ROUND {round} COMPLETE!</p>
+            <p className="text-white/60 text-sm">Score: {score}</p>
             <button
               onClick={nextRound}
               className="bg-brand-green text-white font-bold px-8 py-3 rounded-full hover:bg-brand-pink transition-colors"
             >
               NEXT ROUND
             </button>
-            <p className="text-white/40 text-sm">or press SPACE</p>
+            <p className="text-white/40 text-xs">Press ENTER or SPACE</p>
           </div>
         )}
 
         {gameOver && (
-          <div className="space-y-4">
-            <p className="text-4xl mb-2">💩</p>
-            <p className="text-brand-orange text-2xl font-bold">OH NO! You stepped in it!</p>
-            <p className="text-white/60">Final Score: {score}</p>
-            <p className="text-white/40 text-sm">You made it to round {round}</p>
+          <div className="space-y-2">
+            <p className="text-brand-orange text-xl font-bold">💩 You stepped in it!</p>
+            <p className="text-white/60 text-sm">Score: {score} (Round {round})</p>
             <button
               onClick={startNewGame}
               className="bg-brand-orange text-white font-bold px-8 py-3 rounded-full hover:bg-brand-pink transition-colors"
             >
               TRY AGAIN
             </button>
-            <p className="text-white/40 text-sm">or press SPACE</p>
+            <p className="text-white/40 text-xs">Press ENTER or SPACE</p>
           </div>
         )}
 
         {gameStarted && !gameOver && !gameWon && (
-          <div className="text-white/40 text-sm space-y-1">
-            <p>Use arrow keys or WASD to move</p>
-            <p className="text-brand-pink">Round {round}: Poop spawns every {(getSpawnInterval(round) / 1000).toFixed(1)}s!</p>
-          </div>
+          <p className="text-white/40 text-xs">Arrow keys or WASD to move</p>
         )}
       </div>
 
       {/* Mobile controls */}
       {gameStarted && !gameOver && !gameWon && (
-        <div className="mt-6 md:hidden">
-          <div className="grid grid-cols-3 gap-2 w-36">
+        <div className="mt-3 md:hidden">
+          <div className="grid grid-cols-3 gap-1 w-28">
             <div />
             <button
               onClick={() => movePlayer(0, -1)}
-              className="bg-white/20 rounded-lg p-4 active:bg-brand-green text-xl"
+              className="bg-white/20 rounded-lg p-3 active:bg-brand-green"
             >
               ↑
             </button>
             <div />
             <button
               onClick={() => movePlayer(-1, 0)}
-              className="bg-white/20 rounded-lg p-4 active:bg-brand-green text-xl"
+              className="bg-white/20 rounded-lg p-3 active:bg-brand-green"
             >
               ←
             </button>
             <button
               onClick={() => movePlayer(0, 1)}
-              className="bg-white/20 rounded-lg p-4 active:bg-brand-green text-xl"
+              className="bg-white/20 rounded-lg p-3 active:bg-brand-green"
             >
               ↓
             </button>
             <button
               onClick={() => movePlayer(1, 0)}
-              className="bg-white/20 rounded-lg p-4 active:bg-brand-green text-xl"
+              className="bg-white/20 rounded-lg p-3 active:bg-brand-green"
             >
               →
             </button>
@@ -458,7 +444,7 @@ export default function GamePage() {
       {/* Back link */}
       <Link
         href="/"
-        className="mt-8 text-white/40 hover:text-white text-sm transition-colors"
+        className="mt-3 text-white/40 hover:text-white text-xs transition-colors"
       >
         ← Back to saving the world
       </Link>

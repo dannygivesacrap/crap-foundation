@@ -1,0 +1,18 @@
+export default function Sparkle({
+  className = "",
+  color = "currentColor"
+}: {
+  className?: string;
+  color?: string;
+}) {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className={className}
+      fill={color}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M50 0 C52 35 65 48 100 50 C65 52 52 65 50 100 C48 65 35 52 0 50 C35 48 48 35 50 0Z" />
+    </svg>
+  );
+}

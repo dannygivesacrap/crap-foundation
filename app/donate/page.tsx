@@ -43,7 +43,7 @@ export default function DonatePage() {
               </h2>
 
               {/* Donorbox placeholder */}
-              <div className="bg-brand-cream rounded-2xl p-10 mb-8">
+              <div className="bg-brand-cream rounded-2xl p-6 md:p-10 mb-8">
                 <div className="text-center py-16">
                   <Sparkle className="w-16 h-16 text-brand-green mx-auto mb-6" />
                   <p className="text-2xl font-bold text-black mb-4">
@@ -53,9 +53,9 @@ export default function DonatePage() {
                     Powered by Donorbox
                   </p>
 
-                  <div className="bg-white rounded-xl p-6 border-2 border-dashed border-black/20 text-left">
+                  <div className="bg-white rounded-xl p-4 md:p-6 border-2 border-dashed border-black/20 text-left overflow-hidden">
                     <p className="text-sm text-black/50 mb-2">To enable:</p>
-                    <code className="text-xs bg-black/5 p-3 rounded block overflow-x-auto">
+                    <code className="text-xs bg-black/5 p-3 rounded block overflow-x-auto break-all">
                       {`<iframe src="https://donorbox.org/embed/crap-foundation" />`}
                     </code>
                   </div>

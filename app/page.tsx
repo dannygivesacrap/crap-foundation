@@ -12,7 +12,7 @@ export default function Home() {
             src="/images/impact/hero-water-girl.jpg"
             alt="Girl drinking clean water"
             fill
-            className="object-cover opacity-50 object-[50%_30%] md:object-center"
+            className="object-cover opacity-50 object-right md:object-center"
             priority
           />
         </div>

@@ -37,7 +37,7 @@ export default function DonatePage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Left: Donation widget */}
-            <div>
+            <div className="max-w-md mx-auto lg:mx-0 lg:max-w-none">
               <h2 className="display-text text-3xl md:text-4xl text-black mb-8">
                 Make a donation
               </h2>
@@ -72,7 +72,7 @@ export default function DonatePage() {
             </div>
 
             {/* Right: Impact + image */}
-            <div>
+            <div className="max-w-md mx-auto lg:mx-0 lg:max-w-none">
               <h2 className="display-text text-3xl md:text-4xl text-black mb-8">
                 What your money does
               </h2>

@@ -71,7 +71,7 @@ export default function PartnersPage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pb-16 pt-32">
